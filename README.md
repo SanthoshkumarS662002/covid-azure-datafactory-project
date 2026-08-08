@@ -1,1 +1,0 @@
-# covid-azure-datafactory-project
