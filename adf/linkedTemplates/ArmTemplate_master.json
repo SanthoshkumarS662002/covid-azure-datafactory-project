@@ -1,0 +1,167 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "san-covid-reporting-adf-project-1"
+        },
+        "ls_ablob_covidstorage_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_ablob_covidstorage'"
+        },
+        "ls_adls_covidreportingdatalake1_accountKey": {
+            "type": "secureString",
+            "metadata": "Secure string for 'accountKey' of 'ls_adls_covidreportingdatalake1'"
+        },
+        "ls_hdi_covid_cluster_clusterPassword": {
+            "type": "secureString",
+            "metadata": "Secure string for 'clusterPassword' of 'ls_hdi_covid_cluster'"
+        },
+        "ls_hdi_covid_cluster_clusterSshPassword": {
+            "type": "secureString",
+            "metadata": "Secure string for 'clusterSshPassword' of 'ls_hdi_covid_cluster'"
+        },
+        "ls_adb_covid_cluster_accessToken": {
+            "type": "secureString",
+            "metadata": "Secure string for 'accessToken' of 'ls_adb_covid_cluster'"
+        },
+        "ls_sql_covid_db_password": {
+            "type": "secureString",
+            "metadata": "Secure string for 'password' of 'ls_sql_covid_db'"
+        },
+        "tr_population_data_arrived_properties_typeProperties_scope": {
+            "type": "string",
+            "defaultValue": "/subscriptions/36a20e0f-d13a-4478-a7d1-9ce26a61aa10/resourceGroups/covid-reporting/providers/Microsoft.Storage/storageAccounts/covidstorage"
+        },
+        "ls_adls_covidreportingdatalake1_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://covidreportingdatalake1.dfs.core.windows.net/"
+        },
+        "ls_http_ecdc_source_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com"
+        },
+        "ls_hdi_covid_cluster_properties_typeProperties_hostSubscriptionId": {
+            "type": "string",
+            "defaultValue": "36a20e0f-d13a-4478-a7d1-9ce26a61aa10"
+        },
+        "ls_hdi_covid_cluster_properties_typeProperties_clusterResourceGroup": {
+            "type": "string",
+            "defaultValue": "covid-reporting"
+        },
+        "ls_adb_covid_cluster_properties_typeProperties_existingClusterId": {
+            "type": "string",
+            "defaultValue": "0804-045402-m3dc7vs2"
+        },
+        "ls_sql_covid_db_properties_typeProperties_server": {
+            "type": "string",
+            "defaultValue": "covid-server.database.windows.net"
+        },
+        "ls_sql_covid_db_properties_typeProperties_database": {
+            "type": "string",
+            "defaultValue": "covid-db"
+        },
+        "ls_sql_covid_db_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "adm"
+        },
+        "containerUri": {
+            "type": "string",
+            "metadata": "URI to storage account containing linked ARM templates"
+        },
+        "containerSasToken": {
+            "type": "string",
+            "metadata": "Sas token to storage account containing linked ARM templates"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "san-covid-reporting-adf-project-1_ArmTemplate_0",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2024-03-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    },
+                    "ls_ablob_covidstorage_connectionString": {
+                        "value": "[parameters('ls_ablob_covidstorage_connectionString')]"
+                    },
+                    "ls_adls_covidreportingdatalake1_accountKey": {
+                        "value": "[parameters('ls_adls_covidreportingdatalake1_accountKey')]"
+                    },
+                    "ls_adb_covid_cluster_accessToken": {
+                        "value": "[parameters('ls_adb_covid_cluster_accessToken')]"
+                    },
+                    "ls_sql_covid_db_password": {
+                        "value": "[parameters('ls_sql_covid_db_password')]"
+                    },
+                    "ls_hdi_covid_cluster_clusterPassword": {
+                        "value": "[parameters('ls_hdi_covid_cluster_clusterPassword')]"
+                    },
+                    "ls_hdi_covid_cluster_clusterSshPassword": {
+                        "value": "[parameters('ls_hdi_covid_cluster_clusterSshPassword')]"
+                    },
+                    "ls_adls_covidreportingdatalake1_properties_typeProperties_url": {
+                        "value": "[parameters('ls_adls_covidreportingdatalake1_properties_typeProperties_url')]"
+                    },
+                    "ls_http_ecdc_source_properties_typeProperties_url": {
+                        "value": "[parameters('ls_http_ecdc_source_properties_typeProperties_url')]"
+                    },
+                    "ls_adb_covid_cluster_properties_typeProperties_existingClusterId": {
+                        "value": "[parameters('ls_adb_covid_cluster_properties_typeProperties_existingClusterId')]"
+                    },
+                    "ls_sql_covid_db_properties_typeProperties_server": {
+                        "value": "[parameters('ls_sql_covid_db_properties_typeProperties_server')]"
+                    },
+                    "ls_sql_covid_db_properties_typeProperties_database": {
+                        "value": "[parameters('ls_sql_covid_db_properties_typeProperties_database')]"
+                    },
+                    "ls_sql_covid_db_properties_typeProperties_userName": {
+                        "value": "[parameters('ls_sql_covid_db_properties_typeProperties_userName')]"
+                    },
+                    "ls_hdi_covid_cluster_properties_typeProperties_hostSubscriptionId": {
+                        "value": "[parameters('ls_hdi_covid_cluster_properties_typeProperties_hostSubscriptionId')]"
+                    },
+                    "ls_hdi_covid_cluster_properties_typeProperties_clusterResourceGroup": {
+                        "value": "[parameters('ls_hdi_covid_cluster_properties_typeProperties_clusterResourceGroup')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "san-covid-reporting-adf-project-1_ArmTemplate_1",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2024-03-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    },
+                    "tr_population_data_arrived_properties_typeProperties_scope": {
+                        "value": "[parameters('tr_population_data_arrived_properties_typeProperties_scope')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'san-covid-reporting-adf-project-1_ArmTemplate_0')]"
+            ]
+        }
+    ]
+}
